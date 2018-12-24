@@ -4,21 +4,24 @@ import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
+import com.example.consultants.match.model.data.ContactRepository;
+import com.example.consultants.match.model.data.remote.RemoteDataSource;
+import com.example.consultants.match.model.jsondata.Contact;
 
 import java.util.List;
 
 public class ContactListViewModel extends AndroidViewModel {
-    public static final String TAG = BookListViewModel.class.getSimpleName() + "_TAG";
+    public static final String TAG = ContactListViewModel.class.getSimpleName() + "_TAG";
 
-    private BookRepository bookRepository;
+    private ContactRepository contactRepository;
 
-    public BookListViewModel(@NonNull Application application) {
+    public ContactListViewModel(@NonNull Application application) {
         super(application);
-        bookRepository = new BookRepository(new RemoteDataSource(), new LocalDataSource(application.getApplicationContext()));
+        contactRepository = new ContactRepository(new RemoteDataSource());
     }
 
-    public LiveData<List<Book>> getBooks() {
-        return bookRepository.getBooks();
+    public LiveData<List<Contact>> getContacts() {
+        return contactRepository.getContacts();
     }
 
 }

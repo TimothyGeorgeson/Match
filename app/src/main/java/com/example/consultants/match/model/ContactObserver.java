@@ -1,11 +1,10 @@
 package com.example.consultants.match.model;
 
+import com.example.consultants.match.model.jsondata.ContactResponse;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
-import java.util.List;
-
-public class ContactObserver implements Observer<List<Contact>> {
+public class ContactObserver implements Observer<ContactResponse> {
 
     Callback callback;
 
@@ -26,7 +25,7 @@ public class ContactObserver implements Observer<List<Contact>> {
     }
 
     @Override
-    public void onNext(List<Contact> contacts) {
+    public void onNext(ContactResponse contacts) {
         callback.onNext(contacts);
     }
 
@@ -41,9 +40,7 @@ public class ContactObserver implements Observer<List<Contact>> {
     }
 
     public interface Callback {
-
-        void onNext(List<Contact> contacts);
-
+        void onNext(ContactResponse contacts);
         void onError(String error);
     }
 }
