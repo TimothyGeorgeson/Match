@@ -14,7 +14,7 @@ class ContactRepository(private val remoteDataSource: RemoteDataSource) {
 
     private var listLiveData: MutableLiveData<List<Contact>> = MutableLiveData()
 
-    private fun getContacts() {
+    fun getContacts(): LiveData<List<Contact>> {
         remoteDataSource.randApi.getContactsObservable()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -27,5 +27,6 @@ class ContactRepository(private val remoteDataSource: RemoteDataSource) {
                     Log.i("_tag", error)
                 }
             }))
+        return listLiveData
     }
 }
