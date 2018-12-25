@@ -20,6 +20,7 @@ class ContactRepository(private val remoteDataSource: RemoteDataSource) {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(ContactObserver.addCallback(object : ContactObserver.Callback {
                 override fun onNext(contactResponse: ContactResponse) {
+                    Log.i("_tag", contactResponse.contacts.size.toString())
                     listLiveData.value = contactResponse.contacts
                 }
 

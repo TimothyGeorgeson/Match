@@ -4,9 +4,11 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import com.example.consultants.match.R
 import com.example.consultants.match.model.jsondata.Contact
+import com.squareup.picasso.Picasso
 
 class ContactListAdapter(val contacts: List<Contact>): RecyclerView.Adapter<ContactListAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactListAdapter.ViewHolder {
@@ -15,7 +17,8 @@ class ContactListAdapter(val contacts: List<Contact>): RecyclerView.Adapter<Cont
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.name.text = contacts[position].name.first
+        Picasso.get().load(contacts[position].picture.large).into(holder.ivImage)
+        holder.tvName.text = contacts[position].name.first
     }
 
     override fun getItemCount(): Int {
@@ -23,6 +26,7 @@ class ContactListAdapter(val contacts: List<Contact>): RecyclerView.Adapter<Cont
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        val name: TextView = itemView.findViewById(R.id.name) as TextView
+        val ivImage: ImageView = itemView.findViewById(R.id.ivImage) as ImageView
+        val tvName: TextView = itemView.findViewById(R.id.tvName) as TextView
     }
 }
