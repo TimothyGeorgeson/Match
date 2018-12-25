@@ -12,10 +12,11 @@ import android.widget.TextView
 import com.example.consultants.match.R
 import com.example.consultants.match.model.jsondata.Contact
 import com.example.consultants.match.ui.chat.ChatActivity
+import com.example.consultants.match.ui.contactdetails.ContactDetails
 import com.squareup.picasso.Picasso
 
 class ContactListAdapter(private val contacts: List<Contact>): RecyclerView.Adapter<ContactListAdapter.ViewHolder>() {
-    var context: Context? = null
+    private var context: Context? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactListAdapter.ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
@@ -30,11 +31,13 @@ class ContactListAdapter(private val contacts: List<Contact>): RecyclerView.Adap
             val intent = Intent(context, ChatActivity::class.java)
             context?.startActivity(intent)
         }
+        holder.ivImage.setOnClickListener{
+            val intent = Intent(context, ContactDetails::class.java)
+            context?.startActivity(intent)
+        }
     }
 
-    override fun getItemCount(): Int {
-        return contacts.size
-    }
+    override fun getItemCount() = contacts.size
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val ivImage: ImageView = itemView.findViewById(R.id.ivImage) as ImageView
