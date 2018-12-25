@@ -1,24 +1,35 @@
 package com.example.consultants.match.ui.contactlist
 
+import android.content.Context
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.consultants.match.R
 import com.example.consultants.match.model.jsondata.Contact
+import com.example.consultants.match.ui.chat.ChatActivity
 import com.squareup.picasso.Picasso
 
-class ContactListAdapter(val contacts: List<Contact>): RecyclerView.Adapter<ContactListAdapter.ViewHolder>() {
+class ContactListAdapter(private val contacts: List<Contact>): RecyclerView.Adapter<ContactListAdapter.ViewHolder>() {
+    var context: Context? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactListAdapter.ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
+        context = parent.context
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         Picasso.get().load(contacts[position].picture.large).into(holder.ivImage)
         holder.tvName.text = contacts[position].name.first
+        holder.btnChat.setOnClickListener{
+            val intent = Intent(context, ChatActivity::class.java)
+            context?.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -28,5 +39,6 @@ class ContactListAdapter(val contacts: List<Contact>): RecyclerView.Adapter<Cont
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val ivImage: ImageView = itemView.findViewById(R.id.ivImage) as ImageView
         val tvName: TextView = itemView.findViewById(R.id.tvName) as TextView
+        val btnChat: ImageButton = itemView.findViewById(R.id.btnChat) as ImageButton
     }
 }

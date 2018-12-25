@@ -1,31 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
+        android:layout_margin="6dp"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
     <android.support.v7.widget.CardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-
-        <ImageView
-                android:id="@+id/ivImage"
-                android:layout_width="180sp"
-                android:layout_height="180sp"
-                android:contentDescription="@string/image"
-                app:layout_constraintTop_toTopOf="parent"/>
-
-        <TextView
-                android:id="@+id/tvName"
+        <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="22sp"
-                android:textColor="@android:color/white"
-                android:textStyle="bold"
-                tools:text="Name"/>
+                android:layout_height="wrap_content">
+
+            <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                <ImageView
+                        android:id="@+id/ivImage"
+                        android:layout_width="180sp"
+                        android:layout_height="180sp"
+                        android:contentDescription="@string/image"/>
+
+                <TextView
+                        android:layout_gravity="bottom"
+                        android:id="@+id/tvName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="28sp"
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold"
+                        tools:text="Name"/>
+
+            </FrameLayout>
+
+        <ImageButton
+                android:id="@+id/btnChat"
+                android:paddingTop="4dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/chat"
+                android:layout_gravity="center"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
 
     </android.support.v7.widget.CardView>
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>
