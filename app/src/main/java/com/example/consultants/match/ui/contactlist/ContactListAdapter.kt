@@ -29,10 +29,20 @@ class ContactListAdapter(private val contacts: List<Contact>): RecyclerView.Adap
         holder.tvName.text = contacts[position].name.first
         holder.btnChat.setOnClickListener{
             val intent = Intent(context, ChatActivity::class.java)
+            intent.putExtra("NAME", contacts[position].name.first)
+            intent.putExtra("PICURL", contacts[position].picture.large)
             context?.startActivity(intent)
         }
         holder.ivImage.setOnClickListener{
             val intent = Intent(context, ContactDetails::class.java)
+            intent.putExtra("NAME", contacts[position].name.first)
+            intent.putExtra("GENDER", contacts[position].gender)
+            intent.putExtra("AGE", contacts[position].dob.age)
+            intent.putExtra("EMAIL", contacts[position].email)
+            intent.putExtra("PHONE", contacts[position].phone)
+            intent.putExtra("PICURL", contacts[position].picture.large)
+            intent.putExtra("LAT", contacts[position].location.coordinates.latitude)
+            intent.putExtra("LONG", contacts[position].location.coordinates.longitude)
             context?.startActivity(intent)
         }
     }
