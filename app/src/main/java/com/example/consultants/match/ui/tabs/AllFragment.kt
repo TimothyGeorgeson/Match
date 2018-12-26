@@ -6,16 +6,30 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.consultants.match.R
 import com.example.consultants.match.model.jsondata.Contact
+import com.example.consultants.match.ui.contactlist.ContactListActivity
 import com.example.consultants.match.ui.contactlist.ContactListAdapter
 import com.example.consultants.match.ui.contactlist.ContactListViewModel
 import kotlinx.android.synthetic.main.fragment_all.*
 
 class AllFragment : Fragment(), Observer<List<Contact>> {
+
+    private var lat = ContactListActivity.lat
+    private var lng = ContactListActivity.lng
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (arguments != null) {
+            val bundle = arguments as Bundle
+            lat = bundle.getDouble("LAT")
+            lng = bundle.getDouble("LONG")
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -29,6 +43,8 @@ class AllFragment : Fragment(), Observer<List<Contact>> {
         val rvContactList: RecyclerView = view.findViewById(R.id.rvContactList)
         val layoutManager = GridLayoutManager(context, 2)
         rvContactList.layoutManager = layoutManager
+
+        Log.i("_tag", "from fragment: Lat: $lat Long: $lng")
 
         return view
     }
