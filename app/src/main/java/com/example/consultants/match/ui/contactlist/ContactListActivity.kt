@@ -8,24 +8,22 @@ import android.support.v7.widget.GridLayoutManager
 import android.util.Log
 import com.example.consultants.match.R
 import com.example.consultants.match.model.jsondata.Contact
+import com.example.consultants.match.ui.tabs.AllFragment
+import com.example.consultants.match.ui.tabs.NearbyFragment
 import kotlinx.android.synthetic.main.activity_contact_list.*
 
-class ContactListActivity : AppCompatActivity(), Observer<List<Contact>> {
+class ContactListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contact_list)
 
-        val viewModel: ContactListViewModel = ViewModelProviders.of(this).get(ContactListViewModel::class.java)
+        //initialize viewpageradapter and add 2 fragment tabs
+        val adapter = ContactListViewPagerAdapter(supportFragmentManager)
 
-        viewModel.contacts.observe(this, this)
+        adapter.addFragment(AllFragment(), "All Matches")
+        adapter.addFragment(NearbyFragment(), "Nearby")
 
-        rvContactList.layoutManager = GridLayoutManager(this, 2)
-    }
-
-    override fun onChanged(contacts: List<Contact>?) {
-        if (contacts != null) {
-            val adapter = ContactListAdapter(contacts)
-            rvContactList.adapter = adapter
-        }
+        viewpager.adapter = adapter
+        tabs.setupWithViewPager(viewpager)
     }
 }
