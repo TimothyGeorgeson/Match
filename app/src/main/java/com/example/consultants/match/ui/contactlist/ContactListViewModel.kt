@@ -11,7 +11,10 @@ class ContactListViewModel(application: Application) : AndroidViewModel(applicat
 
     private val contactRepository: ContactRepository = ContactRepository(RemoteDataSource())
 
-    val contacts: LiveData<List<Contact>>
-        get() = contactRepository.getContacts()
+    val allContacts: LiveData<List<Contact>>
+        get() = contactRepository.getAllContacts()
+
+    val nearContacts: LiveData<List<Contact>>
+        get() = contactRepository.getNearContacts()
 
 }

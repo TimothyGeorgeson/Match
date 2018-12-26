@@ -14,8 +14,25 @@ class ContactRepository(private val remoteDataSource: RemoteDataSource) {
 
     private var listLiveData: MutableLiveData<List<Contact>> = MutableLiveData()
 
-    fun getContacts(): LiveData<List<Contact>> {
-        remoteDataSource.randApi.getContactsObservable()
+    fun getAllContacts(): LiveData<List<Contact>> {
+        remoteDataSource.randApi.getAllContactsObservable()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(ContactObserver.addCallback(object : ContactObserver.Callback {
+                override fun onNext(contactResponse: ContactResponse) {
+                    Log.i("_tag", contactResponse.contacts.size.toString())
+                    listLiveData.value = contactResponse.contacts
+                }
+
+                override fun onError(error: String) {
+                    Log.i("_tag", error)
+                }
+            }))
+        return listLiveData
+    }
+
+    fun getNearContacts(): LiveData<List<Contact>> {
+        remoteDataSource.randApi.getNearContactsObservable()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(ContactObserver.addCallback(object : ContactObserver.Callback {

@@ -8,6 +8,10 @@ import retrofit2.http.Headers
 interface RemoteService {
 
     @Headers("Content-Type: application/json")
-    @GET("?gender=female&nat=us&results=10")
-    fun getContactsObservable(): Observable<ContactResponse>
+    @GET("?gender=female&nat=us&results=20")
+    fun getAllContactsObservable(): Observable<ContactResponse>
+
+    @Headers("Content-Type: application/json")
+    @GET("?gender=female&nat=us&results=3")
+    fun getNearContactsObservable(): Observable<ContactResponse>
 }
