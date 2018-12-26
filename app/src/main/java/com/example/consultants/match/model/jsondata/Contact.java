@@ -138,5 +138,4 @@ public class Contact {
     public void setNat(String nat) {
         this.nat = nat;
     }
-
 }

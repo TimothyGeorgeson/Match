@@ -1,4 +1,4 @@
-package com.example.consultants.match.ui.tabs
+package com.example.consultants.match.ui.fragments
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders

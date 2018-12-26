@@ -5,8 +5,8 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.example.consultants.match.R
-import com.example.consultants.match.ui.tabs.AllFragment
-import com.example.consultants.match.ui.tabs.NearbyFragment
+import com.example.consultants.match.ui.fragments.AllFragment
+import com.example.consultants.match.ui.fragments.NearbyFragment
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.tbruyelle.rxpermissions2.RxPermissions
