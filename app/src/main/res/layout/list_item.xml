@@ -25,6 +25,11 @@
                         android:layout_height="180sp"
                         android:contentDescription="@string/image"/>
 
+                <ImageView android:layout_width="180sp"
+                           android:layout_height="180sp"
+                            android:src="@drawable/gradient"
+                           android:contentDescription="@string/image"/>
+
                 <TextView
                         android:layout_gravity="bottom"
                         android:id="@+id/tvName"
