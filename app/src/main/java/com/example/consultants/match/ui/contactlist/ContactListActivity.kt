@@ -13,10 +13,15 @@ import com.tbruyelle.rxpermissions2.RxPermissions
 import kotlinx.android.synthetic.main.activity_contact_list.*
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.SearchManager
+import android.content.Context
+import android.view.Menu
+import android.support.v7.widget.SearchView
 
 class ContactListActivity : AppCompatActivity() {
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private var viewPagerAdapter: ContactListViewPagerAdapter? = null
 
     //store device location - gave default value because getLastLocation wasn't working with emulator
     private var deviceLatLng: Pair<Double, Double> = Pair(lat, lng)
@@ -59,17 +64,45 @@ class ContactListActivity : AppCompatActivity() {
 
     private fun displayTabs() {
         //initialize viewpageradapter and add 2 fragment tabs
-        val adapter = ContactListViewPagerAdapter(supportFragmentManager, deviceLatLng)
+        viewPagerAdapter = ContactListViewPagerAdapter(supportFragmentManager, deviceLatLng)
 
-        adapter.addFragment(AllFragment(), "All Matches")
-        adapter.addFragment(NearbyFragment(), "Nearby")
+        viewPagerAdapter?.addFragment(AllFragment(), "All Matches")
+        viewPagerAdapter?.addFragment(NearbyFragment(), "Nearby")
 
-        viewpager.adapter = adapter
+        viewpager.adapter = viewPagerAdapter
         tabs.setupWithViewPager(viewpager)
     }
 
     companion object {
         const val lat = 33.6
         const val lng = -86.6
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        val searchManager: SearchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val searchView: SearchView = menu?.findItem(R.id.action_search)?.actionView as SearchView
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                // filter recycler view when query submitted
+                if (viewPagerAdapter?.getItem(viewpager.currentItem) is AllFragment) {
+                    val fragment = viewPagerAdapter?.getItem(viewpager.currentItem) as AllFragment
+                    fragment.sendQuery(query)
+                }
+                return false
+            }
+
+            override fun onQueryTextChange(query: String): Boolean {
+                // filter recycler view when text is changed
+                if (viewPagerAdapter?.getItem(viewpager.currentItem) is AllFragment) {
+                    val fragment = viewPagerAdapter?.getItem(viewpager.currentItem) as AllFragment
+                    fragment.sendQuery(query)
+                }
+                return false
+            }
+        })
+        return true
     }
 }

@@ -1,15 +1,17 @@
 package com.example.consultants.match.ui.fragments
 
+import android.app.SearchManager
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat.getSystemService
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.SearchView
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import com.example.consultants.match.R
 import com.example.consultants.match.model.jsondata.Contact
 import com.example.consultants.match.ui.contactlist.ContactListActivity
@@ -22,6 +24,7 @@ class AllFragment : Fragment(), Observer<List<Contact>> {
 
     private var lat = ContactListActivity.lat
     private var lng = ContactListActivity.lng
+    private var adapter: ContactListAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,8 +57,13 @@ class AllFragment : Fragment(), Observer<List<Contact>> {
     override fun onChanged(contacts: List<Contact>?) {
         if (contacts != null) {
             ContactUtil.generateLocations(contacts, lat, lng, false)
-            val adapter = ContactListAdapter(contacts)
+            adapter = ContactListAdapter(contacts)
             rvContactList.adapter = adapter
         }
+    }
+
+    fun sendQuery(query: String) {
+        adapter?.filter?.filter(query)
+        adapter?.notifyDataSetChanged()
     }
 }
