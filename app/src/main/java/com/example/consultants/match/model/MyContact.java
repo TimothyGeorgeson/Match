@@ -6,13 +6,38 @@ import android.os.Parcelable;
 public class MyContact implements Parcelable {
 
     private String name;
-    private String gender;
-    private Integer age;
-    private String email;
-    private String phone;
-    private String picURL;
     private Double lat;
     private Double lng;
+
+    public MyContact(String name, Double lat, Double lng) {
+        this.name = name;
+        this.lat = lat;
+        this.lng = lng;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Double getLat() {
+        return lat;
+    }
+
+    public void setLat(Double lat) {
+        this.lat = lat;
+    }
+
+    public Double getLng() {
+        return lng;
+    }
+
+    public void setLng(Double lng) {
+        this.lng = lng;
+    }
 
     @Override
     public int describeContents() {
@@ -22,11 +47,6 @@ public class MyContact implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(name);
-        dest.writeString(gender);
-        dest.writeInt(age);
-        dest.writeString(email);
-        dest.writeString(phone);
-        dest.writeString(picURL);
         dest.writeDouble(lat);
         dest.writeDouble(lng);
     }
@@ -46,11 +66,6 @@ public class MyContact implements Parcelable {
     // "De-parcel object
     private MyContact(Parcel in) {
         name = in.readString();
-        gender = in.readString();
-        age = in.readInt();
-        email = in.readString();
-        phone = in.readString();
-        picURL = in.readString();
         lat = in.readDouble();
         lng = in.readDouble();
     }
