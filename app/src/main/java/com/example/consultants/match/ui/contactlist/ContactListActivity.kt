@@ -19,7 +19,7 @@ class ContactListActivity : AppCompatActivity() {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     //store device location - gave default value because getLastLocation wasn't working with emulator
-    var deviceLatLng: Pair<Double, Double> = Pair(lat, lng)
+    private var deviceLatLng: Pair<Double, Double> = Pair(lat, lng)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

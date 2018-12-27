@@ -11,11 +11,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.consultants.match.R
+import com.example.consultants.match.model.MyContact
 import com.example.consultants.match.model.jsondata.Contact
 import com.example.consultants.match.ui.contactlist.ContactListActivity
 import com.example.consultants.match.ui.contactlist.ContactListAdapter
 import com.example.consultants.match.ui.contactlist.ContactListViewModel
-import com.example.consultants.match.util.LocationUtil
+import com.example.consultants.match.util.ContactUtil
 import kotlinx.android.synthetic.main.fragment_all.*
 
 class NearbyFragment : Fragment(), Observer<List<Contact>> {
@@ -53,9 +54,19 @@ class NearbyFragment : Fragment(), Observer<List<Contact>> {
     //when contacts data changes, set the adapter to display in recyclerview
     override fun onChanged(contacts: List<Contact>?) {
         if (contacts != null) {
-            LocationUtil.generateLocations(contacts, lat, lng, true)
+            ContactUtil.generateLocations(contacts, lat, lng, true)
+            val myContacts: ArrayList<MyContact> = ContactUtil.getMyContacts(contacts, lat, lng)
+
+            val bundle = Bundle()
+            bundle.putParcelableArrayList("CONTACTS", myContacts)
+            val mapViewFragment = MapViewFragment()
+            mapViewFragment.arguments = bundle
+
+            fragmentManager?.beginTransaction()?.replace(R.id.mapHolder, mapViewFragment)?.commit()
+
             val adapter = ContactListAdapter(contacts)
             rvContactList.adapter = adapter
+
         }
     }
 }

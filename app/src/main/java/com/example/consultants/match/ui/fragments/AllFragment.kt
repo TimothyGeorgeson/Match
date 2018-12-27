@@ -15,7 +15,7 @@ import com.example.consultants.match.model.jsondata.Contact
 import com.example.consultants.match.ui.contactlist.ContactListActivity
 import com.example.consultants.match.ui.contactlist.ContactListAdapter
 import com.example.consultants.match.ui.contactlist.ContactListViewModel
-import com.example.consultants.match.util.LocationUtil
+import com.example.consultants.match.util.ContactUtil
 import kotlinx.android.synthetic.main.fragment_all.*
 
 class AllFragment : Fragment(), Observer<List<Contact>> {
@@ -53,7 +53,7 @@ class AllFragment : Fragment(), Observer<List<Contact>> {
     //when contacts data changes, set the adapter to display in recyclerview
     override fun onChanged(contacts: List<Contact>?) {
         if (contacts != null) {
-            LocationUtil.generateLocations(contacts, lat, lng, false)
+            ContactUtil.generateLocations(contacts, lat, lng, false)
             val adapter = ContactListAdapter(contacts)
             rvContactList.adapter = adapter
         }
