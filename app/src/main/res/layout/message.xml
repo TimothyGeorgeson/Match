@@ -16,6 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/message_user"
             android:layout_alignParentEnd="true"
+            android:textSize="18sp"
             android:id="@+id/message_time" />
 
     <TextView

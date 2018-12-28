@@ -8,6 +8,15 @@ import com.example.consultants.match.R
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
 import android.content.Intent
+import android.text.format.DateFormat
+import android.view.View
+import android.widget.ListView
+import com.example.consultants.match.model.ChatMessage
+import com.firebase.ui.database.FirebaseListAdapter
+import com.google.firebase.database.FirebaseDatabase
+import kotlinx.android.synthetic.main.activity_chat.*
+import android.widget.TextView
+
 
 
 
@@ -15,6 +24,8 @@ class ChatActivity : AppCompatActivity() {
     companion object {
         const val SIGN_IN_REQUEST_CODE = 20
     }
+
+    private var adapter: FirebaseListAdapter<ChatMessage>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +47,21 @@ class ChatActivity : AppCompatActivity() {
 
             // Load chat room contents
             displayChatMessages();
+        }
+
+        fab.setOnClickListener {
+            // Read the input field and push a new instance
+            // of chat message to the Firebase database
+            FirebaseDatabase.getInstance()
+                .reference
+                .push()
+                .setValue(
+                    ChatMessage(input.text.toString(),
+                        FirebaseAuth.getInstance().currentUser?.displayName!!)
+                )
+
+            // Clear the input
+            input.setText("")
         }
     }
 
@@ -67,5 +93,23 @@ class ChatActivity : AppCompatActivity() {
 
     private fun displayChatMessages() {
 
+        val listOfMessages = list_of_messages as ListView
+
+        adapter = object : FirebaseListAdapter<ChatMessage>(this, ChatMessage::class.java,
+            R.layout.message, FirebaseDatabase.getInstance().reference) {
+            override fun populateView(v: View, model: ChatMessage, position: Int) {
+                //bind views
+                val messageText = v.findViewById(R.id.message_text) as TextView
+                val messageUser = v.findViewById(R.id.message_user) as TextView
+                val messageTime = v.findViewById(R.id.message_time) as TextView
+
+                // Set text and date
+                messageText.text = model.messageText
+                messageUser.text = model.messageUser
+                messageTime.text = DateFormat.format("MM-dd-yyyy (HH:mm)", model.messageTime)
+            }
+        }
+
+        listOfMessages.adapter = adapter
     }
 }

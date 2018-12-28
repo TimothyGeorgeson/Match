@@ -109,21 +109,21 @@ class ContactListActivity : AppCompatActivity() {
         return true
     }
 
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        if (item.itemId == R.id.menu_sign_out) {
-//            AuthUI.getInstance().signOut(this)
-//                .addOnCompleteListener {
-//                    Toast.makeText(
-//                        this@ContactListActivity,
-//                        "You have been signed out.",
-//                        Toast.LENGTH_LONG
-//                    )
-//                        .show()
-//
-//                    // Close activity
-//                    finish()
-//                }
-//        }
-//        return true
-//    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.menu_sign_out) {
+            AuthUI.getInstance().signOut(this)
+                .addOnCompleteListener {
+                    Toast.makeText(
+                        this,
+                        "You have been signed out.",
+                        Toast.LENGTH_LONG
+                    )
+                        .show()
+
+                    // Close activity
+                    finish()
+                }
+        }
+        return true
+    }
 }
