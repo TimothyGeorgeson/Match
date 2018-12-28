@@ -1,0 +1,99 @@
+{
+  "project_info": {
+    "project_number": "898299408368",
+    "firebase_url": "https://chase-mobile-b98ee.firebaseio.com",
+    "project_id": "chase-mobile-b98ee",
+    "storage_bucket": "chase-mobile-b98ee.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:898299408368:android:362ae43a45011c46",
+        "android_client_info": {
+          "package_name": "com.example.consultants.chasebanking"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "898299408368-bfk89c78s6h6qs88780l29aoh5nmlc42.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.consultants.chasebanking",
+            "certificate_hash": "3e3c1a7986b550a2a0300df78ac9852534b01309"
+          }
+        },
+        {
+          "client_id": "898299408368-vneot8d72kt747oasnip1e9p53e8dlbk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFzV0HzN21jp9su9hVkE-8TTSw7BZFCJ4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "898299408368-vneot8d72kt747oasnip1e9p53e8dlbk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:898299408368:android:55ca8ee1f9e53c8d",
+        "android_client_info": {
+          "package_name": "com.example.consultants.match"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "898299408368-0aadqp29cftnm2uagqdg7mfb8fi5bo91.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.consultants.match",
+            "certificate_hash": "3e3c1a7986b550a2a0300df78ac9852534b01309"
+          }
+        },
+        {
+          "client_id": "898299408368-vneot8d72kt747oasnip1e9p53e8dlbk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFzV0HzN21jp9su9hVkE-8TTSw7BZFCJ4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "898299408368-vneot8d72kt747oasnip1e9p53e8dlbk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
