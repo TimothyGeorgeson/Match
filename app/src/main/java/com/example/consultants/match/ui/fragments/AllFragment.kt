@@ -64,6 +64,5 @@ class AllFragment : Fragment(), Observer<List<Contact>> {
 
     fun sendQuery(query: String) {
         adapter?.filter?.filter(query)
-        adapter?.notifyDataSetChanged()
     }
 }

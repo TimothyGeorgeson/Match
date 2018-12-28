@@ -91,8 +91,11 @@ class ContactListActivity : AppCompatActivity() {
             override fun onQueryTextSubmit(query: String): Boolean {
                 // filter recycler view when query submitted
                 if (viewPagerAdapter?.getItem(viewpager.currentItem) is AllFragment) {
-                    val fragment = viewPagerAdapter?.getItem(viewpager.currentItem) as AllFragment
-                    fragment.sendQuery(query)
+                    val allFragment = viewPagerAdapter?.getItem(viewpager.currentItem) as AllFragment
+                    allFragment.sendQuery(query)
+                } else if (viewPagerAdapter?.getItem(viewpager.currentItem) is NearbyFragment) {
+                    val nearFragment = viewPagerAdapter?.getItem(viewpager.currentItem) as NearbyFragment
+                    nearFragment.sendQuery(query)
                 }
                 return false
             }
@@ -100,8 +103,11 @@ class ContactListActivity : AppCompatActivity() {
             override fun onQueryTextChange(query: String): Boolean {
                 // filter recycler view when text is changed
                 if (viewPagerAdapter?.getItem(viewpager.currentItem) is AllFragment) {
-                    val fragment = viewPagerAdapter?.getItem(viewpager.currentItem) as AllFragment
-                    fragment.sendQuery(query)
+                    val allFragment = viewPagerAdapter?.getItem(viewpager.currentItem) as AllFragment
+                    allFragment.sendQuery(query)
+                } else if (viewPagerAdapter?.getItem(viewpager.currentItem) is NearbyFragment) {
+                    val nearFragment = viewPagerAdapter?.getItem(viewpager.currentItem) as NearbyFragment
+                    nearFragment.sendQuery(query)
                 }
                 return false
             }

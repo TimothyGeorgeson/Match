@@ -17,10 +17,13 @@ class ContactListAdapter(private val contacts: List<Contact>):
     RecyclerView.Adapter<ContactListAdapter.ViewHolder>(), Filterable {
 
     private var context: Context? = null
+    var contactListFiltered: List<Contact>
+
+    init {
+        contactListFiltered = contacts
+    }
 
     override fun getFilter(): Filter {
-
-        var contactListFiltered: List<Contact>
 
         return object : Filter() {
             override fun performFiltering(charSequence: CharSequence): FilterResults {
@@ -60,29 +63,29 @@ class ContactListAdapter(private val contacts: List<Contact>):
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Picasso.get().load(contacts[position].picture.large).into(holder.ivImage)
-        holder.tvName.text = contacts[position].name.first
+        Picasso.get().load(contactListFiltered[position].picture.large).into(holder.ivImage)
+        holder.tvName.text = contactListFiltered[position].name.first
         holder.btnChat.setOnClickListener{
             val intent = Intent(context, ChatActivity::class.java)
-            intent.putExtra("NAME", contacts[position].name.first)
-            intent.putExtra("PICURL", contacts[position].picture.large)
+            intent.putExtra("NAME", contactListFiltered[position].name.first)
+            intent.putExtra("PICURL", contactListFiltered[position].picture.large)
             context?.startActivity(intent)
         }
         holder.ivImage.setOnClickListener{
             val intent = Intent(context, ContactDetails::class.java)
-            intent.putExtra("NAME", contacts[position].name.first)
-            intent.putExtra("GENDER", contacts[position].gender)
-            intent.putExtra("AGE", contacts[position].dob.age)
-            intent.putExtra("EMAIL", contacts[position].email)
-            intent.putExtra("PHONE", contacts[position].phone)
-            intent.putExtra("PICURL", contacts[position].picture.large)
-            intent.putExtra("LAT", contacts[position].location.coordinates.latitude)
-            intent.putExtra("LONG", contacts[position].location.coordinates.longitude)
+            intent.putExtra("NAME", contactListFiltered[position].name.first)
+            intent.putExtra("GENDER", contactListFiltered[position].gender)
+            intent.putExtra("AGE", contactListFiltered[position].dob.age)
+            intent.putExtra("EMAIL", contactListFiltered[position].email)
+            intent.putExtra("PHONE", contactListFiltered[position].phone)
+            intent.putExtra("PICURL", contactListFiltered[position].picture.large)
+            intent.putExtra("LAT", contactListFiltered[position].location.coordinates.latitude)
+            intent.putExtra("LONG", contactListFiltered[position].location.coordinates.longitude)
             context?.startActivity(intent)
         }
     }
 
-    override fun getItemCount() = contacts.size
+    override fun getItemCount() = contactListFiltered.size
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val ivImage: ImageView = itemView.findViewById(R.id.ivImage) as ImageView

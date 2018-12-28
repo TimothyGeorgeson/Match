@@ -23,6 +23,7 @@ class NearbyFragment : Fragment(), Observer<List<Contact>> {
 
     private var lat = ContactListActivity.lat
     private var lng = ContactListActivity.lng
+    private var adapter: ContactListAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,9 +65,13 @@ class NearbyFragment : Fragment(), Observer<List<Contact>> {
 
             fragmentManager?.beginTransaction()?.replace(R.id.mapHolder, mapViewFragment)?.commit()
 
-            val adapter = ContactListAdapter(contacts)
+            adapter = ContactListAdapter(contacts)
             rvContactList.adapter = adapter
 
         }
+    }
+
+    fun sendQuery(query: String) {
+        adapter?.filter?.filter(query)
     }
 }
