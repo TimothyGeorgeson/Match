@@ -10,4 +10,7 @@
             app:showAsAction="always"
             app:actionViewClass="android.support.v7.widget.SearchView" />
 
+    <item android:title="Sign out" app:showAsAction="never"
+          android:id="@+id/menu_sign_out"/>
+
 </menu>

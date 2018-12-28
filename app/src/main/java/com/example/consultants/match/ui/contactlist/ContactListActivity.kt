@@ -17,6 +17,9 @@ import android.app.SearchManager
 import android.content.Context
 import android.view.Menu
 import android.support.v7.widget.SearchView
+import android.view.MenuItem
+import android.widget.Toast
+import com.firebase.ui.auth.AuthUI
 
 class ContactListActivity : AppCompatActivity() {
 
@@ -105,4 +108,22 @@ class ContactListActivity : AppCompatActivity() {
         })
         return true
     }
+
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        if (item.itemId == R.id.menu_sign_out) {
+//            AuthUI.getInstance().signOut(this)
+//                .addOnCompleteListener {
+//                    Toast.makeText(
+//                        this@ContactListActivity,
+//                        "You have been signed out.",
+//                        Toast.LENGTH_LONG
+//                    )
+//                        .show()
+//
+//                    // Close activity
+//                    finish()
+//                }
+//        }
+//        return true
+//    }
 }
